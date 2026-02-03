@@ -3,359 +3,348 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WELLBORE™ Methodology Animation</title>
+    <title>WELLBORE™ Methodology - AI Transformation Framework</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
         body {
             background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
-            padding: 30px 20px;
+            padding: 40px 20px;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: #ffffff;
-            overflow-x: hidden;
         }
-        .controls {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            display: flex;
-            gap: 10px;
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
         }
-        .btn {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            color: #fff;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 14px;
-            transition: all 0.3s;
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
         }
-        .btn:hover { background: rgba(255,255,255,0.2); }
-        .btn-restart {
-            background: rgba(230, 126, 34, 0.3);
-            border: 1px solid #E67E22;
-        }
-        .header { text-align: center; margin-bottom: 30px; }
         .subtitle {
-            font-size: 12px;
+            font-size: 14px;
             color: #E67E22;
             letter-spacing: 3px;
             margin-bottom: 10px;
             font-weight: 600;
-            opacity: 0;
-            transform: translateY(-20px);
-            transition: all 0.6s ease-out;
         }
-        .subtitle.visible { opacity: 1; transform: translateY(0); }
         .title {
-            font-size: 42px;
+            font-size: 48px;
             font-weight: 800;
             background: linear-gradient(90deg, #E67E22, #F39C12, #E67E22);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            opacity: 0;
-            transform: scale(0.5);
-            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        .title.visible { opacity: 1; transform: scale(1); }
         .methodology {
-            font-size: 20px;
+            font-size: 24px;
             font-weight: 400;
             color: #94a3b8;
-            margin-top: 8px;
-            opacity: 0;
-            transition: all 0.6s ease-out;
+            margin-top: 10px;
         }
-        .methodology.visible { opacity: 1; }
+        .tagline {
+            font-size: 16px;
+            color: #64748b;
+            margin-top: 15px;
+            font-style: italic;
+        }
         .drill-icon {
+            font-size: 60px;
             text-align: center;
             margin-bottom: 20px;
-            font-size: 50px;
             filter: drop-shadow(0 0 20px rgba(230, 126, 34, 0.5));
-            opacity: 0;
-            transform: translateY(-30px) rotate(-10deg);
-            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
-        }
-        .drill-icon.visible {
-            opacity: 1;
-            transform: translateY(0) rotate(0deg);
-            animation: drill 1s ease-in-out infinite;
-        }
-        @keyframes drill {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(5px); }
         }
         .steps-container {
-            max-width: 650px;
-            margin: 0 auto 30px auto;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
         }
         .step {
             display: flex;
             align-items: center;
-            margin-bottom: 6px;
-            opacity: 0;
-            transform: translateX(-50px);
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            margin-bottom: 10px;
         }
-        .step.visible { opacity: 1; transform: translateX(0); }
         .letter-badge {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
+            font-size: 28px;
             font-weight: 800;
             color: #fff;
             flex-shrink: 0;
             border: 3px solid rgba(255,255,255,0.2);
         }
         .connector {
-            width: 25px;
-            height: 3px;
+            width: 30px;
+            height: 4px;
             flex-shrink: 0;
         }
         .content-card {
             flex: 1;
             background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-            padding: 12px 16px;
+            border-radius: 12px;
+            padding: 15px 20px;
             border-left: 4px solid;
+            backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 15px;
         }
-        .step-icon { font-size: 24px; }
-        .step-title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
-        .step-desc { font-size: 11px; color: #94a3b8; }
+        .step-icon {
+            font-size: 28px;
+        }
+        .step-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+        .step-desc {
+            font-size: 13px;
+            color: #94a3b8;
+        }
         .why-different {
             background: rgba(230, 126, 34, 0.1);
-            border-radius: 16px;
-            padding: 20px;
-            max-width: 650px;
-            margin: 0 auto 30px auto;
+            border-radius: 20px;
+            padding: 30px;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
             border: 1px solid rgba(230, 126, 34, 0.3);
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
         }
-        .why-different.visible { opacity: 1; transform: translateY(0); }
-        .why-title { font-size: 16px; color: #E67E22; margin-bottom: 15px; text-align: center; }
+        .why-title {
+            font-size: 20px;
+            color: #E67E22;
+            margin-bottom: 20px;
+            text-align: center;
+        }
         .why-item {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 12px;
+            gap: 12px;
+            font-size: 14px;
             color: #e2e8f0;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
-        .why-icon { font-size: 16px; }
+        .why-icon {
+            font-size: 20px;
+        }
         .deliverables {
-            max-width: 650px;
-            margin: 0 auto 30px auto;
+            max-width: 700px;
+            margin: 0 auto 40px auto;
             text-align: center;
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
         }
-        .deliverables.visible { opacity: 1; transform: translateY(0); }
-        .deliverables-title { font-size: 14px; color: #94a3b8; margin-bottom: 15px; letter-spacing: 2px; }
-        .deliverables-list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+        .deliverables-title {
+            font-size: 18px;
+            color: #94a3b8;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        .deliverables-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+        }
         .deliverable-item {
             background: rgba(255,255,255,0.08);
-            padding: 8px 16px;
-            border-radius: 20px;
-            font-size: 11px;
+            padding: 10px 20px;
+            border-radius: 25px;
+            font-size: 13px;
             color: #e2e8f0;
             border: 1px solid rgba(255,255,255,0.1);
         }
         .footer {
             text-align: center;
             border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 25px;
-            max-width: 450px;
+            padding-top: 30px;
+            max-width: 500px;
             margin: 0 auto;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: all 0.6s ease-out;
         }
-        .footer.visible { opacity: 1; transform: translateY(0); }
         .powered-badge {
             display: inline-block;
             background: linear-gradient(90deg, #E67E22, #F39C12);
             padding: 2px;
-            border-radius: 10px;
-            margin-bottom: 12px;
+            border-radius: 12px;
+            margin-bottom: 15px;
         }
         .powered-inner {
             background: #1a1a2e;
-            padding: 6px 16px;
-            border-radius: 8px;
-            font-size: 10px;
+            padding: 8px 20px;
+            border-radius: 10px;
+            font-size: 12px;
             letter-spacing: 2px;
         }
-        .cta { font-size: 16px; font-weight: 600; color: #e2e8f0; margin-bottom: 8px; }
-        .contact { font-size: 12px; color: #64748b; }
-        .progress {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 4px;
+        .cta {
+            font-size: 18px;
+            font-weight: 600;
+            color: #e2e8f0;
+            margin-bottom: 10px;
         }
-        .progress-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: rgba(255,255,255,0.2);
-            transition: background 0.3s ease;
+        .contact {
+            font-size: 14px;
+            color: #64748b;
         }
-        .progress-dot.active { background: #E67E22; }
     </style>
 </head>
 <body>
-    <div class="controls">
-        <button class="btn" id="playPauseBtn">⏸ Pause</button>
-        <button class="btn btn-restart" id="restartBtn">🔄 Restart</button>
-    </div>
-
-    <div class="header">
-        <div class="subtitle" id="subtitle">THE OIL & GAS-SPECIFIC FRAMEWORK FOR AI TRANSFORMATION</div>
-        <h1 class="title" id="title">THE WELLBORE™</h1>
-        <h2 class="methodology" id="methodology">METHODOLOGY</h2>
-    </div>
-
-    <div class="drill-icon" id="drillIcon">🛢️</div>
-
-    <div class="steps-container" id="stepsContainer"></div>
-
-    <div class="why-different" id="whyDifferent">
-        <h3 class="why-title">⚡ WHY THIS AUDIT IS DIFFERENT</h3>
-        <div class="why-item"><span class="why-icon">📋</span><span>Built BY an Earth Scientist who's been on the rig AND in the boardroom</span></div>
-        <div class="why-item"><span class="why-icon">💵</span><span>ROI calculated in rig day rates ($500K-$1M/day), not just labor hours</span></div>
-        <div class="why-item"><span class="why-icon">🛡️</span><span>Every AI opportunity tagged with HSE classification</span></div>
-        <div class="why-item"><span class="why-icon">🎯</span><span>Generic consultants can't read a well log — we speak your language</span></div>
-    </div>
-
-    <div class="deliverables" id="deliverables">
-        <h3 class="deliverables-title">AUDIT DELIVERABLES</h3>
-        <div class="deliverables-list">
-            <div class="deliverable-item">✓ Upstream Ops Canvas</div>
-            <div class="deliverable-item">✓ HSE Integration Assessment</div>
-            <div class="deliverable-item">✓ O&G ROI Model</div>
-            <div class="deliverable-item">✓ Prioritized Opportunity Matrix</div>
-            <div class="deliverable-item">✓ 12-18 Month Roadmap</div>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="subtitle">THE OIL & GAS-SPECIFIC FRAMEWORK FOR AI TRANSFORMATION</div>
+            <h1 class="title">THE WELLBORE™</h1>
+            <h2 class="methodology">METHODOLOGY</h2>
+            <p class="tagline">Drill deeper. Transform smarter. Deliver results that generic consultants can't.</p>
         </div>
-    </div>
 
-    <div class="footer" id="footer">
-        <div class="powered-badge">
-            <div class="powered-inner">POWERED BY OILAUDIT™</div>
-        </div>
-        <p class="cta">Ready to transform your upstream operations?</p>
-        <p class="contact">discconsult.ai • linkedin.com/in/noelabdullahi</p>
-    </div>
+        <!-- Drill Icon -->
+        <div class="drill-icon">🛢️</div>
 
-    <div class="progress" id="progress"></div>
-
-    <script>
-        const steps = [
-            { letter: 'W', title: 'Workflow Mapping', desc: 'Map upstream value chain & decision points', icon: '🔄', color: '#E67E22' },
-            { letter: 'E', title: 'Environment & Safety', desc: 'HSE integration for every AI opportunity', icon: '🛡️', color: '#27AE60' },
-            { letter: 'L', title: 'Legacy Systems', desc: 'Assess SCADA, historians, integration complexity', icon: '🖥️', color: '#3498DB' },
-            { letter: 'L', title: 'Latency & Connectivity', desc: 'Edge vs. cloud deployment by location', icon: '📡', color: '#9B59B6' },
-            { letter: 'B', title: 'Business Case & ROI', desc: 'Rig economics: NPT, day rates, production', icon: '💰', color: '#F39C12' },
-            { letter: 'O', title: 'Opportunity Matrix', desc: 'Prioritize with O&G-specific criteria', icon: '📊', color: '#1ABC9C' },
-            { letter: 'R', title: 'Roadmap & Phasing', desc: '12-18 month transformation plan', icon: '🗺️', color: '#E74C3C' },
-            { letter: 'E', title: 'Execution Readiness', desc: 'Organizational & field adoption assessment', icon: '🚀', color: '#2C3E50' },
-        ];
-
-        // Build steps HTML
-        const stepsContainer = document.getElementById('stepsContainer');
-        steps.forEach((step, i) => {
-            stepsContainer.innerHTML += `
-                <div class="step" id="step${i}">
-                    <div class="letter-badge" style="background: linear-gradient(135deg, ${step.color}, ${step.color}aa); box-shadow: 0 4px 20px ${step.color}66;">${step.letter}</div>
-                    <div class="connector" style="background: linear-gradient(90deg, ${step.color}, transparent);"></div>
-                    <div class="content-card" style="border-left-color: ${step.color};">
-                        <span class="step-icon">${step.icon}</span>
-                        <div>
-                            <div class="step-title" style="color: ${step.color};">${step.title}</div>
-                            <div class="step-desc">${step.desc}</div>
-                        </div>
+        <!-- Steps -->
+        <div class="steps-container">
+            <!-- W -->
+            <div class="step">
+                <div class="letter-badge" style="background: linear-gradient(135deg, #E67E22, #E67E22aa); box-shadow: 0 4px 20px #E67E2266;">W</div>
+                <div class="connector" style="background: linear-gradient(90deg, #E67E22, transparent);"></div>
+                <div class="content-card" style="border-left-color: #E67E22;">
+                    <span class="step-icon">🔄</span>
+                    <div>
+                        <div class="step-title" style="color: #E67E22;">Workflow Mapping</div>
+                        <div class="step-desc">Map upstream value chain & decision points</div>
                     </div>
                 </div>
-            `;
-        });
+            </div>
+            <!-- E -->
+            <div class="step">
+                <div class="letter-badge" style="background: linear-gradient(135deg, #27AE60, #27AE60aa); box-shadow: 0 4px 20px #27AE6066;">E</div>
+                <div class="connector" style="background: linear-gradient(90deg, #27AE60, transparent);"></div>
+                <div class="content-card" style="border-left-color: #27AE60;">
+                    <span class="step-icon">🛡️</span>
+                    <div>
+                        <div class="step-title" style="color: #27AE60;">Environment & Safety</div>
+                        <div class="step-desc">HSE integration for every AI opportunity</div>
+                    </div>
+                </div>
+            </div>
+            <!-- L -->
+            <div class="step">
+                <div class="letter-badge" style="background: linear-gradient(135deg, #3498DB, #3498DBaa); box-shadow: 0 4px 20px #3498DB66;">L</div>
+                <div class="connector" style="background: linear-gradient(90deg, #3498DB, transparent);"></div>
+                <div class="content-card" style="border-left-color: #3498DB;">
+                    <span class="step-icon">🖥️</span>
+                    <div>
+                        <div class="step-title" style="color: #3498DB;">Legacy Systems</div>
+                        <div class="step-desc">Assess SCADA, historians, integration complexity</div>
+                    </div>
+                </div>
+            </div>
+            <!-- L -->
+            <div class="step">
+                <div class="letter-badge" style="background: linear-gradient(135deg, #9B59B6, #9B59B6aa); box-shadow: 0 4px 20px #9B59B666;">L</div>
+                <div class="connector" style="background: linear-gradient(90deg, #9B59B6, transparent);"></div>
+                <div class="content-card" style="border-left-color: #9B59B6;">
+                    <span class="step-icon">📡</span>
+                    <div>
+                        <div class="step-title" style="color: #9B59B6;">Latency & Connectivity</div>
+                        <div class="step-desc">Edge vs. cloud deployment by location</div>
+                    </div>
+                </div>
+            </div>
+            <!-- B -->
+            <div class="step">
+                <div class="letter-badge" style="background: linear-gradient(135deg, #F39C12, #F39C12aa); box-shadow: 0 4px 20px #F39C1266;">B</div>
+                <div class="connector" style="background: linear-gradient(90deg, #F39C12, transparent);"></div>
+                <div class="content-card" style="border-left-color: #F39C12;">
+                    <span class="step-icon">💰</span>
+                    <div>
+                        <div class="step-title" style="color: #F39C12;">Business Case & ROI</div>
+                        <div class="step-desc">Rig economics: NPT, day rates, production</div>
+                    </div>
+                </div>
+            </div>
+            <!-- O -->
+            <div class="step">
+                <div class="letter-badge" style="background: linear-gradient(135deg, #1ABC9C, #1ABC9Caa); box-shadow: 0 4px 20px #1ABC9C66;">O</div>
+                <div class="connector" style="background: linear-gradient(90deg, #1ABC9C, transparent);"></div>
+                <div class="content-card" style="border-left-color: #1ABC9C;">
+                    <span class="step-icon">📊</span>
+                    <div>
+                        <div class="step-title" style="color: #1ABC9C;">Opportunity Matrix</div>
+                        <div class="step-desc">Prioritize with O&G-specific criteria</div>
+                    </div>
+                </div>
+            </div>
+            <!-- R -->
+            <div class="step">
+                <div class="letter-badge" style="background: linear-gradient(135deg, #E74C3C, #E74C3Caa); box-shadow: 0 4px 20px #E74C3C66;">R</div>
+                <div class="connector" style="background: linear-gradient(90deg, #E74C3C, transparent);"></div>
+                <div class="content-card" style="border-left-color: #E74C3C;">
+                    <span class="step-icon">🗺️</span>
+                    <div>
+                        <div class="step-title" style="color: #E74C3C;">Roadmap & Phasing</div>
+                        <div class="step-desc">12-18 month transformation plan</div>
+                    </div>
+                </div>
+            </div>
+            <!-- E -->
+            <div class="step">
+                <div class="letter-badge" style="background: linear-gradient(135deg, #2C3E50, #2C3E50aa); box-shadow: 0 4px 20px #2C3E5066;">E</div>
+                <div class="connector" style="background: linear-gradient(90deg, #2C3E50, transparent);"></div>
+                <div class="content-card" style="border-left-color: #2C3E50;">
+                    <span class="step-icon">🚀</span>
+                    <div>
+                        <div class="step-title" style="color: #8899aa;">Execution Readiness</div>
+                        <div class="step-desc">Organizational & field adoption assessment</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        // Build progress dots
-        const totalStages = 15;
-        const progress = document.getElementById('progress');
-        for (let i = 0; i < totalStages; i++) {
-            progress.innerHTML += `<div class="progress-dot" id="dot${i}"></div>`;
-        }
+        <!-- Why Different -->
+        <div class="why-different">
+            <h3 class="why-title">⚡ WHY THIS AUDIT IS DIFFERENT</h3>
+            <div class="why-item">
+                <span class="why-icon">📋</span>
+                <span>Built BY an Earth Scientist who's been on the rig AND in the boardroom</span>
+            </div>
+            <div class="why-item">
+                <span class="why-icon">💵</span>
+                <span>ROI calculated in rig day rates ($500K-$1M/day), not just labor hours</span>
+            </div>
+            <div class="why-item">
+                <span class="why-icon">🛡️</span>
+                <span>Every AI opportunity tagged with HSE classification</span>
+            </div>
+            <div class="why-item">
+                <span class="why-icon">🎯</span>
+                <span>Generic consultants can't read a well log — we speak your language</span>
+            </div>
+        </div>
 
-        let stage = 0;
-        let isPlaying = true;
-        let animationTimer;
+        <!-- Deliverables -->
+        <div class="deliverables">
+            <h3 class="deliverables-title">AUDIT DELIVERABLES</h3>
+            <div class="deliverables-list">
+                <div class="deliverable-item">✓ Upstream Ops Canvas</div>
+                <div class="deliverable-item">✓ HSE Integration Assessment</div>
+                <div class="deliverable-item">✓ O&G ROI Model</div>
+                <div class="deliverable-item">✓ Prioritized Opportunity Matrix</div>
+                <div class="deliverable-item">✓ 12-18 Month Roadmap</div>
+            </div>
+        </div>
 
-        const timings = [500, 800, 800, 800, 600, 600, 600, 600, 600, 600, 600, 600, 1000, 1000, 1000];
-
-        function updateStage() {
-            // Update progress dots
-            for (let i = 0; i < totalStages; i++) {
-                document.getElementById(`dot${i}`).classList.toggle('active', i <= stage);
-            }
-
-            if (stage >= 1) document.getElementById('title').classList.add('visible');
-            if (stage >= 2) {
-                document.getElementById('subtitle').classList.add('visible');
-                document.getElementById('methodology').classList.add('visible');
-            }
-            if (stage >= 3) document.getElementById('drillIcon').classList.add('visible');
-            
-            // Steps 4-11
-            for (let i = 0; i < 8; i++) {
-                if (stage >= i + 4) document.getElementById(`step${i}`).classList.add('visible');
-            }
-            
-            if (stage >= 12) document.getElementById('whyDifferent').classList.add('visible');
-            if (stage >= 13) document.getElementById('deliverables').classList.add('visible');
-            if (stage >= 14) document.getElementById('footer').classList.add('visible');
-        }
-
-        function nextStage() {
-            if (!isPlaying || stage >= totalStages - 1) return;
-            stage++;
-            updateStage();
-            animationTimer = setTimeout(nextStage, timings[stage] || 800);
-        }
-
-        function restart() {
-            stage = 0;
-            document.querySelectorAll('.visible').forEach(el => el.classList.remove('visible'));
-            document.querySelectorAll('.progress-dot').forEach(el => el.classList.remove('active'));
-            isPlaying = true;
-            document.getElementById('playPauseBtn').textContent = '⏸ Pause';
-            clearTimeout(animationTimer);
-            animationTimer = setTimeout(nextStage, 500);
-        }
-
-        document.getElementById('playPauseBtn').addEventListener('click', () => {
-            isPlaying = !isPlaying;
-            document.getElementById('playPauseBtn').textContent = isPlaying ? '⏸ Pause' : '▶ Play';
-            if (isPlaying) nextStage();
-        });
-
-        document.getElementById('restartBtn').addEventListener('click', restart);
-
-        // Start animation
-        animationTimer = setTimeout(nextStage, 500);
-    </script>
+        <!-- Footer -->
+        <div class="footer">
+            <div class="powered-badge">
+                <div class="powered-inner">POWERED BY OILAUDIT™</div>
+            </div>
+            <p class="cta">Ready to transform your upstream operations?</p>
+            <p class="contact">discconsult.ai • linkedin.com/in/noelabdullahi</p>
+        </div>
+    </div>
 </body>
 </html>
