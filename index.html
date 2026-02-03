@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 2 - The Problem</title>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .card {
+            width: 1080px;
+            height: 1080px;
+            background: linear-gradient(145deg, #0f1419 0%, #1a1f2e 50%, #0d1117 100%);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 80px;
+        }
+        
+        .accent-line {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 8px;
+            height: 100%;
+            background: linear-gradient(180deg, #ef4444 0%, #dc2626 50%, #991b1b 100%);
+        }
+        
+        .header {
+            margin-bottom: 50px;
+        }
+        
+        .tag {
+            display: inline-block;
+            background: rgba(239, 68, 68, 0.15);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: #ef4444;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            padding: 8px 16px;
+            margin-bottom: 30px;
+        }
+        
+        .main-text {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 64px;
+            color: #ffffff;
+            line-height: 1.1;
+            letter-spacing: 2px;
+            margin-bottom: 50px;
+        }
+        
+        .main-text .red {
+            color: #ef4444;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 80px 1fr;
+            gap: 0;
+            margin-top: 30px;
+        }
+        
+        .comparison-box {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 35px;
+        }
+        
+        .comparison-box.wrong {
+            border-color: rgba(239, 68, 68, 0.3);
+            background: rgba(239, 68, 68, 0.05);
+        }
+        
+        .comparison-box.right {
+            border-color: rgba(34, 197, 94, 0.3);
+            background: rgba(34, 197, 94, 0.05);
+        }
+        
+        .comparison-label {
+            font-size: 12px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+        }
+        
+        .comparison-label.wrong {
+            color: #ef4444;
+        }
+        
+        .comparison-label.right {
+            color: #22c55e;
+        }
+        
+        .comparison-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .comparison-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: #ffffff;
+            margin-bottom: 15px;
+            letter-spacing: 1px;
+        }
+        
+        .comparison-desc {
+            color: #9ca3af;
+            font-size: 16px;
+            line-height: 1.5;
+        }
+        
+        .arrow-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .arrow {
+            font-size: 40px;
+            color: #6b7280;
+        }
+        
+        .stat-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.2);
+            padding: 25px 35px;
+            margin-top: 40px;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+        }
+        
+        .stat-number {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 72px;
+            color: #ef4444;
+            line-height: 1;
+        }
+        
+        .stat-text {
+            color: #d1d5db;
+            font-size: 18px;
+            line-height: 1.4;
+        }
+        
+        .footer {
+            position: absolute;
+            bottom: 40px;
+            left: 80px;
+            right: 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .author {
+            color: #9ca3af;
+            font-size: 16px;
+        }
+        
+        .author span {
+            color: #f59e0b;
+            font-weight: 600;
+        }
+        
+        .hashtag {
+            color: #6b7280;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="accent-line"></div>
+        
+        <div class="header">
+            <div class="tag">The Shiny Object Trap</div>
+        </div>
+        
+        <div class="main-text">
+            MOST AI PROJECTS FAIL<br>
+            <span class="red">BEFORE A SINGLE LINE OF CODE</span>
+        </div>
+        
+        <div class="comparison">
+            <div class="comparison-box wrong">
+                <div class="comparison-label wrong">✕ THE TRAP</div>
+                <div class="comparison-title">SOLUTION → PROBLEM</div>
+                <div class="comparison-desc">
+                    Start with AI technology.<br>
+                    Search for a problem it can solve.<br>
+                    Wonder why nobody uses it.
+                </div>
+            </div>
+            
+            <div class="arrow-container">
+                <div class="arrow">→</div>
+            </div>
+            
+            <div class="comparison-box right">
+                <div class="comparison-label right">✓ THE FIX</div>
+                <div class="comparison-title">PROBLEM → SOLUTION</div>
+                <div class="comparison-desc">
+                    Start with what's costing money.<br>
+                    Define what "solved" looks like.<br>
+                    Then choose the technology.
+                </div>
+            </div>
+        </div>
+        
+        <div class="stat-box">
+            <div class="stat-number">87%</div>
+            <div class="stat-text">of AI projects never make it<br>into production</div>
+        </div>
+        
+        <div class="footer">
+            <div class="author"><span>Noel Abdullahi</span> • AI Transformation Consultant</div>
+            <div class="hashtag">#OilAndGas #AITransformation</div>
+        </div>
+    </div>
+</body>
+</html>
