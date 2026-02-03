@@ -3,246 +3,359 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Post 2 - The Problem</title>
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>WELLBORE™ Methodology Animation</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: 'Inter', sans-serif;
-            background: #0a0a0a;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
             min-height: 100vh;
+            padding: 30px 20px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #ffffff;
+            overflow-x: hidden;
+        }
+        .controls {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 20px;
+            gap: 10px;
         }
-        
-        .card {
-            width: 1080px;
-            height: 1080px;
-            background: linear-gradient(145deg, #0f1419 0%, #1a1f2e 50%, #0d1117 100%);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding: 80px;
-        }
-        
-        .accent-line {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 8px;
-            height: 100%;
-            background: linear-gradient(180deg, #ef4444 0%, #dc2626 50%, #991b1b 100%);
-        }
-        
-        .header {
-            margin-bottom: 50px;
-        }
-        
-        .tag {
-            display: inline-block;
-            background: rgba(239, 68, 68, 0.15);
-            border: 1px solid rgba(239, 68, 68, 0.3);
-            color: #ef4444;
-            font-size: 14px;
-            font-weight: 600;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+        .btn {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            color: #fff;
             padding: 8px 16px;
-            margin-bottom: 30px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
         }
-        
-        .main-text {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 64px;
-            color: #ffffff;
-            line-height: 1.1;
-            letter-spacing: 2px;
-            margin-bottom: 50px;
+        .btn:hover { background: rgba(255,255,255,0.2); }
+        .btn-restart {
+            background: rgba(230, 126, 34, 0.3);
+            border: 1px solid #E67E22;
         }
-        
-        .main-text .red {
-            color: #ef4444;
-        }
-        
-        .comparison {
-            display: grid;
-            grid-template-columns: 1fr 80px 1fr;
-            gap: 0;
-            margin-top: 30px;
-        }
-        
-        .comparison-box {
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 35px;
-        }
-        
-        .comparison-box.wrong {
-            border-color: rgba(239, 68, 68, 0.3);
-            background: rgba(239, 68, 68, 0.05);
-        }
-        
-        .comparison-box.right {
-            border-color: rgba(34, 197, 94, 0.3);
-            background: rgba(34, 197, 94, 0.05);
-        }
-        
-        .comparison-label {
+        .header { text-align: center; margin-bottom: 30px; }
+        .subtitle {
             font-size: 12px;
-            font-weight: 700;
-            letter-spacing: 2px;
-            text-transform: uppercase;
+            color: #E67E22;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            font-weight: 600;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: all 0.6s ease-out;
+        }
+        .subtitle.visible { opacity: 1; transform: translateY(0); }
+        .title {
+            font-size: 42px;
+            font-weight: 800;
+            background: linear-gradient(90deg, #E67E22, #F39C12, #E67E22);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            opacity: 0;
+            transform: scale(0.5);
+            transition: all 0.8s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+        .title.visible { opacity: 1; transform: scale(1); }
+        .methodology {
+            font-size: 20px;
+            font-weight: 400;
+            color: #94a3b8;
+            margin-top: 8px;
+            opacity: 0;
+            transition: all 0.6s ease-out;
+        }
+        .methodology.visible { opacity: 1; }
+        .drill-icon {
+            text-align: center;
             margin-bottom: 20px;
+            font-size: 50px;
+            filter: drop-shadow(0 0 20px rgba(230, 126, 34, 0.5));
+            opacity: 0;
+            transform: translateY(-30px) rotate(-10deg);
+            transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        
-        .comparison-label.wrong {
-            color: #ef4444;
+        .drill-icon.visible {
+            opacity: 1;
+            transform: translateY(0) rotate(0deg);
+            animation: drill 1s ease-in-out infinite;
         }
-        
-        .comparison-label.right {
-            color: #22c55e;
+        @keyframes drill {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(5px); }
         }
-        
-        .comparison-icon {
-            font-size: 48px;
-            margin-bottom: 20px;
+        .steps-container {
+            max-width: 650px;
+            margin: 0 auto 30px auto;
         }
-        
-        .comparison-title {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 28px;
-            color: #ffffff;
-            margin-bottom: 15px;
-            letter-spacing: 1px;
+        .step {
+            display: flex;
+            align-items: center;
+            margin-bottom: 6px;
+            opacity: 0;
+            transform: translateX(-50px);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
         }
-        
-        .comparison-desc {
-            color: #9ca3af;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-        
-        .arrow-container {
+        .step.visible { opacity: 1; transform: translateX(0); }
+        .letter-badge {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            position: relative;
+            font-size: 24px;
+            font-weight: 800;
+            color: #fff;
+            flex-shrink: 0;
+            border: 3px solid rgba(255,255,255,0.2);
         }
-        
-        .arrow {
-            font-size: 40px;
-            color: #6b7280;
+        .connector {
+            width: 25px;
+            height: 3px;
+            flex-shrink: 0;
         }
-        
-        .stat-box {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid rgba(239, 68, 68, 0.2);
-            padding: 25px 35px;
-            margin-top: 40px;
+        .content-card {
+            flex: 1;
+            background: rgba(255,255,255,0.05);
+            border-radius: 10px;
+            padding: 12px 16px;
+            border-left: 4px solid;
             display: flex;
             align-items: center;
-            gap: 30px;
+            gap: 12px;
         }
-        
-        .stat-number {
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 72px;
-            color: #ef4444;
-            line-height: 1;
+        .step-icon { font-size: 24px; }
+        .step-title { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+        .step-desc { font-size: 11px; color: #94a3b8; }
+        .why-different {
+            background: rgba(230, 126, 34, 0.1);
+            border-radius: 16px;
+            padding: 20px;
+            max-width: 650px;
+            margin: 0 auto 30px auto;
+            border: 1px solid rgba(230, 126, 34, 0.3);
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
         }
-        
-        .stat-text {
-            color: #d1d5db;
-            font-size: 18px;
-            line-height: 1.4;
+        .why-different.visible { opacity: 1; transform: translateY(0); }
+        .why-title { font-size: 16px; color: #E67E22; margin-bottom: 15px; text-align: center; }
+        .why-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 12px;
+            color: #e2e8f0;
+            margin-bottom: 10px;
         }
-        
+        .why-icon { font-size: 16px; }
+        .deliverables {
+            max-width: 650px;
+            margin: 0 auto 30px auto;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+        .deliverables.visible { opacity: 1; transform: translateY(0); }
+        .deliverables-title { font-size: 14px; color: #94a3b8; margin-bottom: 15px; letter-spacing: 2px; }
+        .deliverables-list { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
+        .deliverable-item {
+            background: rgba(255,255,255,0.08);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 11px;
+            color: #e2e8f0;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
         .footer {
-            position: absolute;
-            bottom: 40px;
-            left: 80px;
-            right: 80px;
+            text-align: center;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 25px;
+            max-width: 450px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
+        }
+        .footer.visible { opacity: 1; transform: translateY(0); }
+        .powered-badge {
+            display: inline-block;
+            background: linear-gradient(90deg, #E67E22, #F39C12);
+            padding: 2px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+        .powered-inner {
+            background: #1a1a2e;
+            padding: 6px 16px;
+            border-radius: 8px;
+            font-size: 10px;
+            letter-spacing: 2px;
+        }
+        .cta { font-size: 16px; font-weight: 600; color: #e2e8f0; margin-bottom: 8px; }
+        .contact { font-size: 12px; color: #64748b; }
+        .progress {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
             display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding-top: 30px;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            gap: 4px;
         }
-        
-        .author {
-            color: #9ca3af;
-            font-size: 16px;
+        .progress-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            transition: background 0.3s ease;
         }
-        
-        .author span {
-            color: #f59e0b;
-            font-weight: 600;
-        }
-        
-        .hashtag {
-            color: #6b7280;
-            font-size: 14px;
-            letter-spacing: 1px;
-        }
+        .progress-dot.active { background: #E67E22; }
     </style>
 </head>
 <body>
-    <div class="card">
-        <div class="accent-line"></div>
-        
-        <div class="header">
-            <div class="tag">The Shiny Object Trap</div>
-        </div>
-        
-        <div class="main-text">
-            MOST AI PROJECTS FAIL<br>
-            <span class="red">BEFORE A SINGLE LINE OF CODE</span>
-        </div>
-        
-        <div class="comparison">
-            <div class="comparison-box wrong">
-                <div class="comparison-label wrong">✕ THE TRAP</div>
-                <div class="comparison-title">SOLUTION → PROBLEM</div>
-                <div class="comparison-desc">
-                    Start with AI technology.<br>
-                    Search for a problem it can solve.<br>
-                    Wonder why nobody uses it.
-                </div>
-            </div>
-            
-            <div class="arrow-container">
-                <div class="arrow">→</div>
-            </div>
-            
-            <div class="comparison-box right">
-                <div class="comparison-label right">✓ THE FIX</div>
-                <div class="comparison-title">PROBLEM → SOLUTION</div>
-                <div class="comparison-desc">
-                    Start with what's costing money.<br>
-                    Define what "solved" looks like.<br>
-                    Then choose the technology.
-                </div>
-            </div>
-        </div>
-        
-        <div class="stat-box">
-            <div class="stat-number">87%</div>
-            <div class="stat-text">of AI projects never make it<br>into production</div>
-        </div>
-        
-        <div class="footer">
-            <div class="author"><span>Noel Abdullahi</span> • AI Transformation Consultant</div>
-            <div class="hashtag">#OilAndGas #AITransformation</div>
+    <div class="controls">
+        <button class="btn" id="playPauseBtn">⏸ Pause</button>
+        <button class="btn btn-restart" id="restartBtn">🔄 Restart</button>
+    </div>
+
+    <div class="header">
+        <div class="subtitle" id="subtitle">THE OIL & GAS-SPECIFIC FRAMEWORK FOR AI TRANSFORMATION</div>
+        <h1 class="title" id="title">THE WELLBORE™</h1>
+        <h2 class="methodology" id="methodology">METHODOLOGY</h2>
+    </div>
+
+    <div class="drill-icon" id="drillIcon">🛢️</div>
+
+    <div class="steps-container" id="stepsContainer"></div>
+
+    <div class="why-different" id="whyDifferent">
+        <h3 class="why-title">⚡ WHY THIS AUDIT IS DIFFERENT</h3>
+        <div class="why-item"><span class="why-icon">📋</span><span>Built BY an Earth Scientist who's been on the rig AND in the boardroom</span></div>
+        <div class="why-item"><span class="why-icon">💵</span><span>ROI calculated in rig day rates ($500K-$1M/day), not just labor hours</span></div>
+        <div class="why-item"><span class="why-icon">🛡️</span><span>Every AI opportunity tagged with HSE classification</span></div>
+        <div class="why-item"><span class="why-icon">🎯</span><span>Generic consultants can't read a well log — we speak your language</span></div>
+    </div>
+
+    <div class="deliverables" id="deliverables">
+        <h3 class="deliverables-title">AUDIT DELIVERABLES</h3>
+        <div class="deliverables-list">
+            <div class="deliverable-item">✓ Upstream Ops Canvas</div>
+            <div class="deliverable-item">✓ HSE Integration Assessment</div>
+            <div class="deliverable-item">✓ O&G ROI Model</div>
+            <div class="deliverable-item">✓ Prioritized Opportunity Matrix</div>
+            <div class="deliverable-item">✓ 12-18 Month Roadmap</div>
         </div>
     </div>
+
+    <div class="footer" id="footer">
+        <div class="powered-badge">
+            <div class="powered-inner">POWERED BY OILAUDIT™</div>
+        </div>
+        <p class="cta">Ready to transform your upstream operations?</p>
+        <p class="contact">discconsult.ai • linkedin.com/in/noelabdullahi</p>
+    </div>
+
+    <div class="progress" id="progress"></div>
+
+    <script>
+        const steps = [
+            { letter: 'W', title: 'Workflow Mapping', desc: 'Map upstream value chain & decision points', icon: '🔄', color: '#E67E22' },
+            { letter: 'E', title: 'Environment & Safety', desc: 'HSE integration for every AI opportunity', icon: '🛡️', color: '#27AE60' },
+            { letter: 'L', title: 'Legacy Systems', desc: 'Assess SCADA, historians, integration complexity', icon: '🖥️', color: '#3498DB' },
+            { letter: 'L', title: 'Latency & Connectivity', desc: 'Edge vs. cloud deployment by location', icon: '📡', color: '#9B59B6' },
+            { letter: 'B', title: 'Business Case & ROI', desc: 'Rig economics: NPT, day rates, production', icon: '💰', color: '#F39C12' },
+            { letter: 'O', title: 'Opportunity Matrix', desc: 'Prioritize with O&G-specific criteria', icon: '📊', color: '#1ABC9C' },
+            { letter: 'R', title: 'Roadmap & Phasing', desc: '12-18 month transformation plan', icon: '🗺️', color: '#E74C3C' },
+            { letter: 'E', title: 'Execution Readiness', desc: 'Organizational & field adoption assessment', icon: '🚀', color: '#2C3E50' },
+        ];
+
+        // Build steps HTML
+        const stepsContainer = document.getElementById('stepsContainer');
+        steps.forEach((step, i) => {
+            stepsContainer.innerHTML += `
+                <div class="step" id="step${i}">
+                    <div class="letter-badge" style="background: linear-gradient(135deg, ${step.color}, ${step.color}aa); box-shadow: 0 4px 20px ${step.color}66;">${step.letter}</div>
+                    <div class="connector" style="background: linear-gradient(90deg, ${step.color}, transparent);"></div>
+                    <div class="content-card" style="border-left-color: ${step.color};">
+                        <span class="step-icon">${step.icon}</span>
+                        <div>
+                            <div class="step-title" style="color: ${step.color};">${step.title}</div>
+                            <div class="step-desc">${step.desc}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        });
+
+        // Build progress dots
+        const totalStages = 15;
+        const progress = document.getElementById('progress');
+        for (let i = 0; i < totalStages; i++) {
+            progress.innerHTML += `<div class="progress-dot" id="dot${i}"></div>`;
+        }
+
+        let stage = 0;
+        let isPlaying = true;
+        let animationTimer;
+
+        const timings = [500, 800, 800, 800, 600, 600, 600, 600, 600, 600, 600, 600, 1000, 1000, 1000];
+
+        function updateStage() {
+            // Update progress dots
+            for (let i = 0; i < totalStages; i++) {
+                document.getElementById(`dot${i}`).classList.toggle('active', i <= stage);
+            }
+
+            if (stage >= 1) document.getElementById('title').classList.add('visible');
+            if (stage >= 2) {
+                document.getElementById('subtitle').classList.add('visible');
+                document.getElementById('methodology').classList.add('visible');
+            }
+            if (stage >= 3) document.getElementById('drillIcon').classList.add('visible');
+            
+            // Steps 4-11
+            for (let i = 0; i < 8; i++) {
+                if (stage >= i + 4) document.getElementById(`step${i}`).classList.add('visible');
+            }
+            
+            if (stage >= 12) document.getElementById('whyDifferent').classList.add('visible');
+            if (stage >= 13) document.getElementById('deliverables').classList.add('visible');
+            if (stage >= 14) document.getElementById('footer').classList.add('visible');
+        }
+
+        function nextStage() {
+            if (!isPlaying || stage >= totalStages - 1) return;
+            stage++;
+            updateStage();
+            animationTimer = setTimeout(nextStage, timings[stage] || 800);
+        }
+
+        function restart() {
+            stage = 0;
+            document.querySelectorAll('.visible').forEach(el => el.classList.remove('visible'));
+            document.querySelectorAll('.progress-dot').forEach(el => el.classList.remove('active'));
+            isPlaying = true;
+            document.getElementById('playPauseBtn').textContent = '⏸ Pause';
+            clearTimeout(animationTimer);
+            animationTimer = setTimeout(nextStage, 500);
+        }
+
+        document.getElementById('playPauseBtn').addEventListener('click', () => {
+            isPlaying = !isPlaying;
+            document.getElementById('playPauseBtn').textContent = isPlaying ? '⏸ Pause' : '▶ Play';
+            if (isPlaying) nextStage();
+        });
+
+        document.getElementById('restartBtn').addEventListener('click', restart);
+
+        // Start animation
+        animationTimer = setTimeout(nextStage, 500);
+    </script>
 </body>
 </html>
